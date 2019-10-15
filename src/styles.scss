@@ -1,1 +1,30 @@
-/* You can add global styles to this file, and also import other style files */
+// colours
+$pale-green: #eef5db;
+$mint: #c7efcf;
+$tangerine: #fe5f55;
+$coral: #e63462;
+$charcoal: #333745;
+
+// utility
+$gutter: 0.625rem;
+$border-radius: 3px;
+
+// styles
+body {
+	background-color: $pale-green;
+	font-family: Helvetica, Arial, sans-serif;
+	color: $charcoal;
+}
+
+.btn {
+	border: 0;
+	border-radius: $border-radius;
+	background-color: $tangerine;
+	color: white;
+	padding: $gutter ($gutter *2);
+	&:focus,
+	&:hover {
+		background-color: $coral;
+		cursor: pointer;
+	}
+}

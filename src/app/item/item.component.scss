@@ -1,0 +1,9 @@
+@import 'src/styles.scss';
+
+:host {
+	background-color: $mint;
+	padding: $gutter * 2;
+	border-radius: $border-radius;
+	display: block;
+	margin-bottom: $gutter * 2;
+}
