@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import * as html2pdf from 'node_modules/html2pdf.js';
-import * as docx from 'node_modules/docx';
+import { Document, Packer, Paragraph, TextRun } from 'node_modules/docx';
+import { saveAs } from 'file-saver/dist/FileSaver';
 
 @Component({
 	selector: 'app-root',
@@ -90,5 +91,33 @@ export class AppComponent {
 				}
 			})
 			.save();
+	}
+
+	// doc
+	private doc = new Document();
+
+	public docxit() {
+		this.doc.addSection({
+			properties: {},
+			children: [
+				new Paragraph({
+					children: [
+						new TextRun('Hello World'),
+						new TextRun({
+							text: 'Foo Bar',
+							bold: true
+						}),
+						new TextRun({
+							text: 'Github is the best',
+							bold: true
+						}).tab()
+					]
+				})
+			]
+		});
+
+		Packer.toBlob(this.doc).then(blob => {
+			saveAs(blob, 'Report Export ' + this.date.getDate() + '-' + this.date.getMonth() + '-' + this.date.getFullYear() + 'docx');
+		});
 	}
 }
