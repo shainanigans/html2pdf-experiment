@@ -1,0 +1,16 @@
+{
+  "printWidth": 2000,
+  "singleQuote": true,
+  "stylelintIntegration": true,
+  "tabWidth": 4,
+  "tslintIntegration": true,
+  "useTabs": true,
+  "overrides": [
+    {
+      "files": ["*.ts", "*.html"],
+      "options": {
+        "printWidth": 140
+      }
+    }
+  ]
+}
