@@ -1,7 +1,23 @@
 <div class="app">
   <div class="app__header">
-    <h1 class="app__heading">Let's make a pdf!</h1>
-    <button class="btn" type="button">PDFify</button>
+    <h1 class="app__heading" #heading>Let's make a pdf!</h1>
+    <div>
+        <button class="btn" type="button" (click)="pdfify(body)">
+          PDFify
+        </button>
+        <button class="btn" type="button" (click)="window.print()">
+          Print
+        </button>
+      </div>
   </div>
-  <app-item *ngFor="let item of data" [data]="item"></app-item>
+
+  <div #body>
+    <p class="app__hero">
+      Let me in let me out <a href="#" class="item__link">let me in</a> let me out let me in let me out who broke
+      this door anyway with tail in the air, so purrrrrr but chew master's
+      slippers sleep on keyboard side-eyes your "jerk" other hand while being
+      petted catto munch salmono.
+    </p>
+    <app-item *ngFor="let item of data" [data]="item"></app-item>
+  </div>
 </div>

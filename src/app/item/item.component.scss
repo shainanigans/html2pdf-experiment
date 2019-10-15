@@ -6,4 +6,16 @@
 	border-radius: $border-radius;
 	display: block;
 	margin-bottom: $gutter * 2;
+	break-inside: avoid;
+}
+.item__link--print {
+	&:after {
+		content: ' (' attr(href) ') ';
+	}
+}
+
+@media print {
+	:host {
+		background-color: $mint;
+	}
 }

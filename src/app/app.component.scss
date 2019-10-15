@@ -1,6 +1,6 @@
 @import 'src/styles.scss';
 
-.app{
+.app {
 	max-width: 60rem;
 	padding: $gutter;
 	margin: 0 auto;
@@ -12,4 +12,7 @@
 }
 .app__heading {
 	margin-right: $gutter * 2;
+}
+.app__hero {
+	font-size: 1.2rem;
 }

@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import * as html2pdf from "node_modules/html2pdf.js";
 
 @Component({
   selector: "app-root",
@@ -6,13 +7,14 @@ import { Component } from "@angular/core";
   styleUrls: ["./app.component.scss"]
 })
 export class AppComponent {
-  title = "HTML2PDF Experiment";
+  public title = "HTML2PDF Experiment";
+  public window = window;
 
-  data: any[] = [
+  public data: any[] = [
     {
       title: "Russian Blue",
       content:
-        "Headbutt owner's knee bleghbleghvomit my furball really tie the room together and poop in litter box, scratch the walls cat ass trophy push your water glass on the floor so cats making all the muffins munch on tasty moths."
+        "Headbutt owner's knee bleghbleghvomit my <a href=\"http://google.com\" class=\"item__link\">furball</a> really tie the room together and poop in litter box, scratch the walls cat ass trophy push your water glass on the floor so cats making all the muffins munch on tasty moths."
     },
     {
       title: "Ragdoll",
@@ -53,4 +55,57 @@ export class AppComponent {
       content: "Paw at beetle and eat it before it gets away."
     }
   ];
+
+  private date = new Date();
+  private options: any = {
+	  	filename: 'Report Export ' + this.date.getDate() + '-' + this.date.getMonth() + '-' + this.date.getFullYear(),
+	  	enableLinks: true,
+		margin: [10, 10, 20, 10],
+		pagebreak: { mode: "css" },
+		html2canvas: {
+		letterRendering: true
+	}
+  };
+
+//   toggleUrlVisibility() {
+//     const links: any[] = document.getElementsByClassName('item__link');
+//     for (let i = 1; i < links.length; i++) {
+// 		console.log('for');
+//       if (links[i].classList.contains('item__link--print')) {
+// 		  console.log('if')
+//         links[i].classList.remove('item__link--print');
+//       } else {
+//         links[i].classList.add('item__link--print');
+//       }
+//     }
+//   }
+
+  public pdfify(element) {
+    // this.toggleUrlVisibility();
+    html2pdf().set(this.options).from(element).toPdf().get('pdf').then(pdf => {
+      var totalPages = pdf.internal.getNumberOfPages();
+
+      for (let i = 1; i <= totalPages; i++) {
+        pdf.setPage(i);
+        pdf.setFontSize(10);
+        pdf.setTextColor(150);
+        pdf.text('Page ' + i + ' of ' + totalPages, pdf.internal.pageSize.getWidth() - 115, pdf.internal.pageSize.getHeight() - 10);
+      } 
+    }).save();
+    // this.toggleUrlVisibility();
+  }
+
+  /**
+   * pdfify multiple elements
+   * problem with this is that it creates each as its own page
+   */
+	//   public pdfify(elements: any[]) {
+	// 	let doc = html2pdf().set(this.options).from(elements[0]).toPdf();
+	// 	for (let j = 1; j < elements.length; j++) {
+	//         doc = doc.get('pdf').then(
+	//           pdf => { pdf.addPage() }
+	//         ).from(elements[j]).toContainer().toCanvas().toPdf()
+	//       }
+	//       doc.save()
+	//   }
 }

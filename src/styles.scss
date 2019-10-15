@@ -15,7 +15,15 @@ body {
 	font-family: Helvetica, Arial, sans-serif;
 	color: $charcoal;
 }
-
+a {
+	color: $tangerine;
+	text-decoration: none;
+	&:focus,
+	&:hover {
+		color: $coral;
+		outline: none;
+	}
+}
 .btn {
 	border: 0;
 	border-radius: $border-radius;
@@ -26,5 +34,20 @@ body {
 	&:hover {
 		background-color: $coral;
 		cursor: pointer;
+		outline: none;
+	}
+	.btn + & {
+		margin-left: $gutter;
+	}
+}
+
+@media print {
+	a {
+		&:after {
+			content: ' (' attr(href) ') ';
+		}
+	}
+	.btn {
+		display: none;
 	}
 }
